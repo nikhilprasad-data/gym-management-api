@@ -21,25 +21,21 @@ class UserSignupSerializer(serializers.ModelSerializer):
 
         return user
 
-class UserLoginSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
+# class UserLoginSerializer(serializers.Serializer):
+#     username = serializers.CharField()
+#     password = serializers.CharField(write_only=True)
 
-    class Meta:
-        model = User
-        fields = ['username','password']
+#     def validate(self,data):
+#         username = data.get('username')
+#         password = data.get('password')
 
-    def validate(self,data):
-        username = data.get('username')
-        password = data.get('password')
+#         if username and password:
+#             user = authenticate(username=username,password=password)
 
-        if username and password:
-            user = authenticate(username=username,password=password)
+#             if not user:
+#                 raise serializers.ValidationError("Invalid username or password.")
+#         else:
+#             raise serializers.ValidationError("Must include username and password.")
 
-            if not user:
-                raise serializers.ValidationError("Invalid username or password.")
-        else:
-            raise serializers.ValidationError("Must include username and password.")
-
-        data['user'] = user
-        return data
+#         data['user'] = user
+#         return data
